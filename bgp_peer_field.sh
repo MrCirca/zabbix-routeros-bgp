@@ -25,5 +25,21 @@ if [ "$PEER_FIELD_NAME" == "state" ]; then
 		echo
 	fi
 else
-	echo $PEER_FIELD
+	DAY=$(echo -e "$PEER_FIELD" | cut -d "d" -f1)
+
+	HOURS=$(echo -e "$PEER_FIELD" | cut -d "d" -f2 | cut -d "h" -f1)
+
+	MINUTES=$(echo -e "$PEER_FIELD" | cut -d "h" -f2 | cut -d "m" -f1)
+
+	SECONDS=$(echo -e "$PEER_FIELD" | cut -d "m" -f2 | cut -d "s" -f1)
+
+	DAY_TO_SECONDS=$(($DAY * 86400))
+
+	HOURS_TO_SECONDS=$(($HOURS * 3600))
+
+	MINUTES_TO_SECONDS=$(($MINUTES * 60))
+
+	SUM_SECONDS=$(($DAY_TO_SECONDS + $HOURS_TO_SECONDS + $MINUTES_TO_SECONDS + $SECONDS))
+	
+	echo $SUM_SECONDS
 fi
