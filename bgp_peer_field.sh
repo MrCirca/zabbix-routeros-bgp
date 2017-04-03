@@ -37,8 +37,6 @@ elif [ "$PEER_FIELD_NAME" == "uptime" ]; then
 	SECONDS=$(echo -e "$PEER_FIELD" | egrep -o '[0-9]+s' | tr -d 's')
 	SECONDS=${SECONDS:-0}
 
-	echo "$DAYS $HOURS $MINUTES $SECONDS"
-
 	TOTAL_SECONDS=$(echo "$DAYS * 86400 + $HOURS * 3600 + $MINUTES * 60 + $SECONDS" | bc)
 
 	echo $TOTAL_SECONDS
