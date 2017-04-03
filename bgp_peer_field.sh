@@ -24,22 +24,24 @@ if [ "$PEER_FIELD_NAME" == "state" ]; then
 	else
 		echo
 	fi
+elif [ "$PEER_FIELD_NAME" == "uptime" ]; then
+	DAYS=$(echo -e "$PEER_FIELD" | egrep -o '[0-9]+d' | tr -d 'd')
+	DAYS=${DAYS:-0}
+
+	HOURS=$(echo -e "$PEER_FIELD" | egrep -o '[0-9]+h' | tr -d 'h')
+	HOURS=${HOURS:-0}
+
+	MINUTES=$(echo -e "$PEER_FIELD" | egrep -o '[0-9]+m' | tr -d 'm')
+	MINUTES=${MINUTES:-0}
+
+	SECONDS=$(echo -e "$PEER_FIELD" | egrep -o '[0-9]+s' | tr -d 's')
+	SECONDS=${SECONDS:-0}
+
+	echo "$DAYS $HOURS $MINUTES $SECONDS"
+
+	TOTAL_SECONDS=$(echo "$DAYS * 86400 + $HOURS * 3600 + $MINUTES * 60 + $SECONDS" | bc)
+
+	echo $TOTAL_SECONDS
 else
-	DAY=$(echo -e "$PEER_FIELD" | cut -d "d" -f1)
-
-	HOURS=$(echo -e "$PEER_FIELD" | cut -d "d" -f2 | cut -d "h" -f1)
-
-	MINUTES=$(echo -e "$PEER_FIELD" | cut -d "h" -f2 | cut -d "m" -f1)
-
-	SECONDS=$(echo -e "$PEER_FIELD" | cut -d "m" -f2 | cut -d "s" -f1)
-
-	DAY_TO_SECONDS=$(($DAY * 86400))
-
-	HOURS_TO_SECONDS=$(($HOURS * 3600))
-
-	MINUTES_TO_SECONDS=$(($MINUTES * 60))
-
-	SUM_SECONDS=$(($DAY_TO_SECONDS + $HOURS_TO_SECONDS + $MINUTES_TO_SECONDS + $SECONDS))
-	
-	echo $SUM_SECONDS
+	echo "$FIELD_NAME not supporting"
 fi
