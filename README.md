@@ -1,6 +1,6 @@
 # Monitoring Mikrotik BGP peer state and uptime on Zabbix
 Using external script method on Zabbix, i made two scripts, getting values through [Mikrotik API](https://wiki.mikrotik.com/wiki/Manual:API_Python3).<br>
-[Mikrotik API(Python 3)](https://wiki.mikrotik.com/wiki/Manual:API_Python3)  is interactive. So i modified it, having output the values that we demand and  disconnects.
+[Mikrotik API(Python 3)](https://wiki.mikrotik.com/wiki/Manual:API_Python3)  is interactive. So I modified it to print the values I demand and then it disconnects automatically.
 
 Project Files:
 
