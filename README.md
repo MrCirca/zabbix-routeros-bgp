@@ -11,6 +11,7 @@ Project Files:
 
 
 *The reason I created the bgp_peer_names.sh is so that zabbix can discover the peer names and create items for each peer name.*
+![Zabbix BGP Monitoring on Mikrotik](https://i.imgur.com/5I8vzrm.png)
 
 
 
