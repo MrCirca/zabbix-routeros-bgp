@@ -12,14 +12,14 @@ Project Files:
 **Simple script test**:
 
 
-./bgp_peer_filed.sh **username** **password** **bgp_peer_name** **state/uptime**
+./bgp_peer_filed.sh "**username**" "**password**" "**bgp_peer_name**" "**state/uptime**"
 
 **Zabbix Discovery Key**:
 
 
 bgp_peer_names.sh["{HOST.CONN}","{$DEVICE_USERNAME}","{$DEVICE_PASSWORD}"]
 
-*You should make your own macros like {$DEVICE_USERNAME} and {$DEVICE_PASSWORD}
+*You should make your own macros like "{$DEVICE_USERNAME}" and "{$DEVICE_PASSWORD}"
 
 
 *The reason I created the bgp_peer_names.sh is so that zabbix can discover the peer names and create items for each peer name.*
