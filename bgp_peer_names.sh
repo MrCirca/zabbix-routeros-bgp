@@ -4,7 +4,7 @@ USERNAME=$2
 PASSWORD=$3
 
 API_CALL="/routing/bgp/peer/print\n=status=\n"
-API_ROS_COMMAND="/home/zabbix/externalscripts/apiros.py"
+API_ROS_COMMAND=$(cat /etc/zabbix/zabbix_server.conf | grep "ExternalScripts=" | cut -d "=" -f 2)/apiros.py
 
 PEERS_STATUS=$(echo -e "$API_CALL" | "$API_ROS_COMMAND" "$HOST" "$USERNAME" "$PASSWORD")
 PEER_NAMES=$(echo -e "$PEERS_STATUS" | grep -E -o '=name=[^ ]+' | cut -d "=" -f 3 | sed 's,\n, ,g')
