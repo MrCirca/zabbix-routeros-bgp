@@ -41,5 +41,5 @@ elif [ "$PEER_FIELD_NAME" == "uptime" ]; then
 
 	echo $TOTAL_SECONDS
 else
-	echo "$FIELD_NAME not supporting"
+	echo "$FIELD_NAME is not supported"
 fi
