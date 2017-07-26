@@ -17,7 +17,7 @@ You should also import **zbx_routeros_bgp.xml** zabbix template on zabbix server
 **Simple script test**:
 
 ```shell
- bgp_peer_filed.sh "**RouterOS_USERNAME**" "**RouterOS_PASSWORD**" "**bgp_peer_name**" "**state/uptime**"
+ bgp_peer_filed.sh <RouterOS_USERNAME> <RouterOS_PASSWORD> <bgp_peer_name> <state/uptime>
 ```
 
 **Zabbix Discovery Key**:
