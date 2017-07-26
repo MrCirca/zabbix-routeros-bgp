@@ -6,7 +6,7 @@ PASSWORD=$3
 API_CALL="/routing/bgp/peer/print\n=status=\n"
 API_ROS_COMMAND="/home/zabbix/externalscripts/apiros.py"
 
-PEERS_STATUS=$(echo -e "$API_CALL" | $API_ROS_COMMAND "$HOST" "$USERNAME" "$PASSWORD")
+PEERS_STATUS=$(echo -e "$API_CALL" | "$API_ROS_COMMAND" "$HOST" "$USERNAME" "$PASSWORD")
 PEER_NAMES=$(echo -e "$PEERS_STATUS" | grep -E -o '=name=[^ ]+' | cut -d "=" -f 3 | sed 's,\n, ,g')
 
 PEER_NAMES_JSON="{\n    \"data\":["
