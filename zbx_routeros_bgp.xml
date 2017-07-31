@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.0</version>
-    <date>2017-07-31T10:32:48Z</date>
+    <date>2017-07-31T12:56:30Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -138,37 +138,7 @@
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template RouterOS BGP:bgp_peer_field.sh[&quot;{HOST.CONN}&quot;, &quot;{$ROUTEROS_USERNAME}&quot;, &quot;{$ROUTEROS_PASSWORD}&quot;, {#BGP_PEER_NAME}, &quot;uptime&quot;].last(,20s)}&lt;120 and {Template RouterOS BGP:bgp_peer_field.sh[&quot;{HOST.CONN}&quot;, &quot;{$ROUTEROS_USERNAME}&quot;, &quot;{$ROUTEROS_PASSWORD}&quot;, {#BGP_PEER_NAME}, &quot;uptime&quot;].last(,20s)}&gt;10</expression>
-                            <name>BGP peer {#BGP_PEER_NAME} has been disconnected</name>
-                            <url/>
-                            <status>0</status>
-                            <priority>2</priority>
-                            <description/>
-                            <type>0</type>
-                            <dependencies/>
-                        </trigger_prototype>
-                        <trigger_prototype>
-                            <expression>{Template RouterOS BGP:bgp_peer_field.sh[&quot;{HOST.CONN}&quot;, &quot;{$ROUTEROS_USERNAME}&quot;, &quot;{$ROUTEROS_PASSWORD}&quot;, {#BGP_PEER_NAME}, &quot;uptime&quot;].last(,600s)}=0</expression>
-                            <name>BGP peer {#BGP_PEER_NAME} has been disconnected</name>
-                            <url/>
-                            <status>1</status>
-                            <priority>2</priority>
-                            <description/>
-                            <type>0</type>
-                            <dependencies/>
-                        </trigger_prototype>
-                        <trigger_prototype>
-                            <expression>{Template RouterOS BGP:bgp_peer_field.sh[&quot;{HOST.CONN}&quot;, &quot;{$ROUTEROS_USERNAME}&quot;, &quot;{$ROUTEROS_PASSWORD}&quot;, {#BGP_PEER_NAME}, &quot;state&quot;].last(,5s)}=0</expression>
-                            <name>BGP peer {#BGP_PEER_NAME} is disabled</name>
-                            <url/>
-                            <status>1</status>
-                            <priority>2</priority>
-                            <description/>
-                            <type>0</type>
-                            <dependencies/>
-                        </trigger_prototype>
-                        <trigger_prototype>
-                            <expression>{Template RouterOS BGP:bgp_peer_field.sh[&quot;{HOST.CONN}&quot;, &quot;{$ROUTEROS_USERNAME}&quot;, &quot;{$ROUTEROS_PASSWORD}&quot;, {#BGP_PEER_NAME}, &quot;state&quot;].last(,5s)}&lt;4 and {Template RouterOS BGP:bgp_peer_field.sh[&quot;{HOST.CONN}&quot;, &quot;{$ROUTEROS_USERNAME}&quot;, &quot;{$ROUTEROS_PASSWORD}&quot;, {#BGP_PEER_NAME}, &quot;state&quot;].last(,5s)}&gt;0</expression>
+                            <expression>{Template RouterOS BGP:bgp_peer_field.sh[&quot;{HOST.CONN}&quot;, &quot;{$ROUTEROS_USERNAME}&quot;, &quot;{$ROUTEROS_PASSWORD}&quot;, {#BGP_PEER_NAME}, &quot;state&quot;].last(#5)}&lt;4 and {Template RouterOS BGP:bgp_peer_field.sh[&quot;{HOST.CONN}&quot;, &quot;{$ROUTEROS_USERNAME}&quot;, &quot;{$ROUTEROS_PASSWORD}&quot;, {#BGP_PEER_NAME}, &quot;state&quot;].last(#5)}&gt;0</expression>
                             <name>BGP peer {#BGP_PEER_NAME} state is not established</name>
                             <url/>
                             <status>0</status>
@@ -178,83 +148,18 @@
                             <dependencies/>
                         </trigger_prototype>
                     </trigger_prototypes>
-                    <graph_prototypes>
-                        <graph_prototype>
-                            <name>BGP peer {#BGP_PEER_NAME} state</name>
-                            <width>900</width>
-                            <height>200</height>
-                            <yaxismin>0.0000</yaxismin>
-                            <yaxismax>100.0000</yaxismax>
-                            <show_work_period>1</show_work_period>
-                            <show_triggers>1</show_triggers>
-                            <type>0</type>
-                            <show_legend>1</show_legend>
-                            <show_3d>0</show_3d>
-                            <percent_left>0.0000</percent_left>
-                            <percent_right>0.0000</percent_right>
-                            <ymin_type_1>0</ymin_type_1>
-                            <ymax_type_1>0</ymax_type_1>
-                            <ymin_item_1>0</ymin_item_1>
-                            <ymax_item_1>0</ymax_item_1>
-                            <graph_items>
-                                <graph_item>
-                                    <sortorder>0</sortorder>
-                                    <drawtype>0</drawtype>
-                                    <color>1A7C11</color>
-                                    <yaxisside>0</yaxisside>
-                                    <calc_fnc>7</calc_fnc>
-                                    <type>0</type>
-                                    <item>
-                                        <host>Template RouterOS BGP</host>
-                                        <key>bgp_peer_field.sh[&quot;{HOST.CONN}&quot;, &quot;{$ROUTEROS_USERNAME}&quot;, &quot;{$ROUTEROS_PASSWORD}&quot;, {#BGP_PEER_NAME}, &quot;state&quot;]</key>
-                                    </item>
-                                </graph_item>
-                            </graph_items>
-                        </graph_prototype>
-                        <graph_prototype>
-                            <name>BGP peer {#BGP_PEER_NAME} uptime</name>
-                            <width>900</width>
-                            <height>200</height>
-                            <yaxismin>0.0000</yaxismin>
-                            <yaxismax>100.0000</yaxismax>
-                            <show_work_period>1</show_work_period>
-                            <show_triggers>1</show_triggers>
-                            <type>0</type>
-                            <show_legend>1</show_legend>
-                            <show_3d>0</show_3d>
-                            <percent_left>0.0000</percent_left>
-                            <percent_right>0.0000</percent_right>
-                            <ymin_type_1>0</ymin_type_1>
-                            <ymax_type_1>0</ymax_type_1>
-                            <ymin_item_1>0</ymin_item_1>
-                            <ymax_item_1>0</ymax_item_1>
-                            <graph_items>
-                                <graph_item>
-                                    <sortorder>0</sortorder>
-                                    <drawtype>0</drawtype>
-                                    <color>F63100</color>
-                                    <yaxisside>0</yaxisside>
-                                    <calc_fnc>7</calc_fnc>
-                                    <type>0</type>
-                                    <item>
-                                        <host>Template RouterOS BGP</host>
-                                        <key>bgp_peer_field.sh[&quot;{HOST.CONN}&quot;, &quot;{$ROUTEROS_USERNAME}&quot;, &quot;{$ROUTEROS_PASSWORD}&quot;, {#BGP_PEER_NAME}, &quot;uptime&quot;]</key>
-                                    </item>
-                                </graph_item>
-                            </graph_items>
-                        </graph_prototype>
-                    </graph_prototypes>
+                    <graph_prototypes/>
                     <host_prototypes/>
                 </discovery_rule>
             </discovery_rules>
             <macros>
                 <macro>
                     <macro>{$ROUTEROS_PASSWORD}</macro>
-                    <value/>
+                    <value>zabbix_discovery</value>
                 </macro>
                 <macro>
                     <macro>{$ROUTEROS_USERNAME}</macro>
-                    <value/>
+                    <value>zabbix</value>
                 </macro>
             </macros>
             <templates/>
