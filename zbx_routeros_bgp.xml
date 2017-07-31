@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.0</version>
-    <date>2017-07-26T14:42:20Z</date>
+    <date>2017-07-31T10:24:12Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -90,7 +90,7 @@
                             <inventory_link>0</inventory_link>
                             <applications/>
                             <valuemap>
-                                <name>BGP peer state</name>
+                                <name>RouterOS BGP value mapping</name>
                             </valuemap>
                             <logtimefmt/>
                             <application_prototypes/>
@@ -138,7 +138,7 @@
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template RouterOS BGP:bgp_peer_field.sh[&quot;{HOST.CONN}&quot;, &quot;{$ROUTEROS_USERNAME}&quot;, &quot;{$ROUTEROS_PASSWORD}&quot;, {#BGP_PEER_NAME}, &quot;uptime&quot;].last(,10s)}&lt;60</expression>
+                            <expression>{Template RouterOS BGP:bgp_peer_field.sh[&quot;{HOST.CONN}&quot;, &quot;{$ROUTEROS_USERNAME}&quot;, &quot;{$ROUTEROS_PASSWORD}&quot;, {#BGP_PEER_NAME}, &quot;uptime&quot;].last(,20s)}&lt;120 and {Template RouterOS BGP:bgp_peer_field.sh[&quot;{HOST.CONN}&quot;, &quot;{$ROUTEROS_USERNAME}&quot;, &quot;{$ROUTEROS_PASSWORD}&quot;, {#BGP_PEER_NAME}, &quot;uptime&quot;].last(,20s)}&gt;10</expression>
                             <name>BGP peer {#BGP_PEER_NAME} has been disconnected</name>
                             <url/>
                             <status>0</status>
@@ -148,7 +148,27 @@
                             <dependencies/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{Template RouterOS BGP:bgp_peer_field.sh[&quot;{HOST.CONN}&quot;, &quot;{$ROUTEROS_USERNAME}&quot;, &quot;{$ROUTEROS_PASSWORD}&quot;, {#BGP_PEER_NAME}, &quot;state&quot;].last(,5s)}&lt;3</expression>
+                            <expression>{Template RouterOS BGP:bgp_peer_field.sh[&quot;{HOST.CONN}&quot;, &quot;{$ROUTEROS_USERNAME}&quot;, &quot;{$ROUTEROS_PASSWORD}&quot;, {#BGP_PEER_NAME}, &quot;uptime&quot;].last(,600s)}=0</expression>
+                            <name>BGP peer {#BGP_PEER_NAME} has been disconnected</name>
+                            <url/>
+                            <status>1</status>
+                            <priority>2</priority>
+                            <description/>
+                            <type>0</type>
+                            <dependencies/>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>{Template RouterOS BGP:bgp_peer_field.sh[&quot;{HOST.CONN}&quot;, &quot;{$ROUTEROS_USERNAME}&quot;, &quot;{$ROUTEROS_PASSWORD}&quot;, {#BGP_PEER_NAME}, &quot;state&quot;].last(,5s)}=0</expression>
+                            <name>BGP peer {#BGP_PEER_NAME} is disabled</name>
+                            <url/>
+                            <status>1</status>
+                            <priority>2</priority>
+                            <description/>
+                            <type>0</type>
+                            <dependencies/>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>{Template RouterOS BGP:bgp_peer_field.sh[&quot;{HOST.CONN}&quot;, &quot;{$ROUTEROS_USERNAME}&quot;, &quot;{$ROUTEROS_PASSWORD}&quot;, {#BGP_PEER_NAME}, &quot;state&quot;].last(,5s)}&lt;4 and {Template RouterOS BGP:bgp_peer_field.sh[&quot;{HOST.CONN}&quot;, &quot;{$ROUTEROS_USERNAME}&quot;, &quot;{$ROUTEROS_PASSWORD}&quot;, {#BGP_PEER_NAME}, &quot;state&quot;].last(,5s)}&gt;0</expression>
                             <name>BGP peer {#BGP_PEER_NAME} state is not established</name>
                             <url/>
                             <status>0</status>
@@ -227,29 +247,42 @@
                     <host_prototypes/>
                 </discovery_rule>
             </discovery_rules>
-            <macros/>
+            <macros>
+                <macro>
+                    <macro>{$ROUTEROS_PASSWORD}</macro>
+                    <value/>
+                </macro>
+                <macro>
+                    <macro>{$ROUTEROS_USERNAME}</macro>
+                    <value/>
+                </macro>
+            </macros>
             <templates/>
             <screens/>
         </template>
     </templates>
     <value_maps>
         <value_map>
-            <name>BGP peer state</name>
+            <name>RouterOS BGP value mapping</name>
             <mappings>
                 <mapping>
                     <value>0</value>
-                    <newvalue>idle</newvalue>
+                    <newvalue>disabled</newvalue>
                 </mapping>
                 <mapping>
                     <value>1</value>
-                    <newvalue>opensent - openconfirm</newvalue>
+                    <newvalue>idle</newvalue>
                 </mapping>
                 <mapping>
                     <value>2</value>
-                    <newvalue>active</newvalue>
+                    <newvalue>openconfirm - opensent</newvalue>
                 </mapping>
                 <mapping>
                     <value>3</value>
+                    <newvalue>active</newvalue>
+                </mapping>
+                <mapping>
+                    <value>4</value>
                     <newvalue>established</newvalue>
                 </mapping>
             </mappings>
