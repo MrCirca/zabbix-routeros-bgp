@@ -20,11 +20,10 @@ if [ "$PEER_FIELD_NAME" == "state" ]; then
 
 	elif [ "$PEER_FIELD" == "idle" ]; then
 		echo 1
-	elif [ "$PEER_FIELD" == "" ]; then
-                echo 0
 	else
-		echo
+                echo 0
 	fi
+
 elif [ "$PEER_FIELD_NAME" == "uptime" ]; then
 	if [ "$PEER_FIELD" == "" ]; then
 		echo 0
