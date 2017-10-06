@@ -28,6 +28,9 @@ elif [ "$PEER_FIELD_NAME" == "uptime" ]; then
 	if [ "$PEER_FIELD" == "" ]; then
 		echo 0
 	else
+		WEEKS=$(echo -e "$PEER_FIELD" | egrep -o '[0-9]+w' | tr -d 'w')
+		WEEKS=${WEEKS:-0}
+
 		DAYS=$(echo -e "$PEER_FIELD" | egrep -o '[0-9]+d' | tr -d 'd')
 		DAYS=${DAYS:-0}
 
@@ -40,7 +43,7 @@ elif [ "$PEER_FIELD_NAME" == "uptime" ]; then
 		SECONDS=$(echo -e "$PEER_FIELD" | egrep -o '[0-9]+s' | tr -d 's')
 		SECONDS=${SECONDS:-0}
 
-		TOTAL_SECONDS=$(echo "$DAYS * 86400 + $HOURS * 3600 + $MINUTES * 60 + $SECONDS" | bc)
+		TOTAL_SECONDS=$(echo "$WEEKS * 604800 + $DAYS * 86400 + $HOURS * 3600 + $MINUTES * 60 + $SECONDS" | bc)
 
 		echo $TOTAL_SECONDS
 	fi
